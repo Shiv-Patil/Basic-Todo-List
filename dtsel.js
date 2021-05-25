@@ -81,12 +81,13 @@
         this.timeFormatRegEx = new RegExp("hh|mm|ss|a", "gi");
         this.inputElem = elem;
         this.dtbox = null;
+        this.handler = this.inputElemHandler.bind(this);
         this.setup();
     }
     DTS.prototype.setup = function () {
-        var handler = this.inputElemHandler.bind(this);
-        this.inputElem.addEventListener("focus", handler, false);
-        this.inputElem.addEventListener("blur", handler, false);
+        this.inputElem = document.querySelectorAll('input[name="dateTimePicker"]')[0]
+        this.inputElem.addEventListener("focus", this.handler, false);
+        this.inputElem.addEventListener("blur", this.handler, false);
     }
     DTS.prototype.inputElemHandler = function (e) {
         if (e.type == "focus") {
